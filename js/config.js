@@ -1,3 +1,4 @@
+// Tablicy zawierająca całość wyświetlanego tekstu
 export const textArray = [
   'Pierwszy kod do sukcesu',
   'Zacznij karierę w IT.',

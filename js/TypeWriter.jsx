@@ -4,7 +4,8 @@ class TypeWriter extends React.Component {
 
   constructor() {
     super();
-
+    // Początkowa wartość state zawiera sposoby pokazywania elementów span
+    // i zawartość wyświetlaną w paragrafach
     this.state = {
       firstLine: '',
       secondLine: '',
@@ -14,51 +15,61 @@ class TypeWriter extends React.Component {
   }
 
   componentDidMount() {
-    const {text} = this.props;
+
+    // Dokonuję destrukturyzacji obiektu props a także tworzę zmiennę
+    // których będę używał do wyświetlania napisów
+    const {text, interval, delay} = this.props;
     let textFirst = '';
     let textSecond = '';
     let index = 1;
+    let newWord = true;
+
 
     this.intervalFirst = setInterval((fullText = [...text[0]], typedText = textFirst) => {
+      // Cały napis dodaje się litera po literze, zostaje zapisany w state i wyświetlony
       textFirst = typedText.concat(fullText[typedText.length]);
       this.setState({firstLine: textFirst});
 
+      // Jeśli cały napis został już wyświetlony to:
+      // Znika pierwszy span i pojawia się drugi
+      // Pierwszy interwał zostaje wyczyszczony
       if (this.state.firstLine === text[0]) {
         this.setState({firstSpan: 'none', secondSpan: 'inline'});
         clearInterval(this.intervalFirst);
 
-        const repeatMessage = (amount) => {
+        // Zostaje odpalony drugi interwał literujący drugą linijkę tekstu
+        this.intervalSecond = setInterval((fullText = [...text[index]], typedText = textSecond) => {
 
-          if(amount === 0){
-            return Promise.resolve();
+          // Przy każdym nowym zdaniu flaga newWord odpala timeout trwający ilośc czasu podaną w props
+          if (newWord) {
+            this.timeout = setTimeout(() => {
+              newWord = false;
+            }, delay);
+          } else {
+            // Tak jak wcześniej zdanie zostaje wyświetlone litera po literze
+            textSecond = typedText.concat(fullText[typedText.length]);
+            this.setState({secondLine: textSecond});
+
+            // Pod koniec każdego zdania index się zwiększa, wyświetlany tekst zeruję a flaga resetuje
+            if (this.state.secondLine === text[index]) {
+              index += 1;
+              textSecond = '';
+              newWord = true;
+            }
+
+            // Pod koniec wyświetlania całości tablicy, w zależności of własności infinite podanej w props
+            // następuje albo zakończenie wywietlania albo reset indexu do 1
+            if (!this.props.infinite && index === text.length) {
+              clearInterval(this.intervalSecond);
+            } else if (index === text.length) {
+              index = 1;
+            }
           }
-          return new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-            }, this.props.delay)
-          })
-            .then(() => this.intervalSecond = setInterval((fullText = [...text[index]], typedText = textSecond) => {
-              if(typedText === text[index - 1]) {
-                typedText = '';
-              }
-              textSecond = typedText.concat(fullText[typedText.length]);
-              this.setState({secondLine: textSecond});
-              if (this.state.secondLine === text[index]) {
-                clearInterval(this.intervalSecond);
-                index += 1;
-              }
-            }, this.props.interval))
-            .then(() => {return repeatMessage(amount-1)})
 
-        };
-
-        repeatMessage(text.length - 1)
-          .then(console.log('doone'))
-
+        }, interval)
 
       }
-    }, this.props.interval);
-
+    }, interval);
 
   }
 
@@ -67,6 +78,9 @@ class TypeWriter extends React.Component {
   }
 
   render() {
+    // Komponent renderuje diva z dwoma paragrafami a ich zawartość jest zależna od state
+    // Po wygenerowaniu całego pierwszego napisu this.state.firstSpan zmienia się na none i
+    // powoduje zniknięcie elementu span
     return (
       <div className="typeWriter">
         <p>{this.state.firstLine}<span style={{display: this.state.firstSpan}}>|</span></p>
