@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="typeWriter"
+>
+  <p>
+    
+    <span
+      style={
+        Object {
+          "display": "inline",
+        }
+      }
+    >
+      |
+    </span>
+  </p>
+  <p>
+    
+    <span
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      |
+    </span>
+  </p>
+</div>
+`;

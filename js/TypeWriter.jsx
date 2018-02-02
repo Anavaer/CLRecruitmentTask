@@ -22,7 +22,7 @@ class TypeWriter extends React.Component {
     let textFirst = '';
     let textSecond = '';
     let index = 1;
-    let newWord = true;
+    let newSentence = true;
 
 
     this.intervalFirst = setInterval((fullText = [...text[0]], typedText = textFirst) => {
@@ -40,10 +40,10 @@ class TypeWriter extends React.Component {
         // Zostaje odpalony drugi interwał literujący drugą linijkę tekstu
         this.intervalSecond = setInterval((fullText = [...text[index]], typedText = textSecond) => {
 
-          // Przy każdym nowym zdaniu flaga newWord odpala timeout trwający ilośc czasu podaną w props
-          if (newWord) {
+          // Przy każdym nowym zdaniu flaga newSentence odpala timeout trwający ilośc czasu podaną w props
+          if (newSentence) {
             this.timeout = setTimeout(() => {
-              newWord = false;
+              newSentence = false;
             }, delay);
           } else {
             // Tak jak wcześniej zdanie zostaje wyświetlone litera po literze
@@ -54,7 +54,7 @@ class TypeWriter extends React.Component {
             if (this.state.secondLine === text[index]) {
               index += 1;
               textSecond = '';
-              newWord = true;
+              newSentence = true;
             }
 
             // Pod koniec wyświetlania całości tablicy, w zależności of własności infinite podanej w props

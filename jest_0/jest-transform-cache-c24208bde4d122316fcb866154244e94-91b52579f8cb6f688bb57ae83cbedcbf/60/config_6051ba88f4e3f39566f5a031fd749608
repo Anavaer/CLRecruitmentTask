@@ -1,0 +1,13 @@
+8ae5cb9df0a901bf867c7fd09f8ad207
+'use strict';Object.defineProperty(exports, "__esModule", { value: true }); // Tablicy zawierająca całość wyświetlanego tekstu
+var textArray = exports.textArray = [
+'Pierwszy kod do sukcesu',
+'Zacznij karierę w IT.',
+'Naucz się programować.',
+'Zostań programistą.',
+'Zostań Programistą Java.',
+'Zostań Programistą .Net.',
+'Zostań Programistą Python.',
+'Zostań Programistą Ruby.',
+'Zostań Front-end developerem.'];
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbmZpZy5qcyJdLCJuYW1lcyI6WyJ0ZXh0QXJyYXkiXSwibWFwcGluZ3MiOiI0RUFBQTtBQUNPLElBQU1BLGdDQUFZO0FBQ3ZCLHlCQUR1QjtBQUV2Qix1QkFGdUI7QUFHdkIsd0JBSHVCO0FBSXZCLHFCQUp1QjtBQUt2QiwwQkFMdUI7QUFNdkIsMEJBTnVCO0FBT3ZCLDRCQVB1QjtBQVF2QiwwQkFSdUI7QUFTdkIsK0JBVHVCLENBQWxCIiwiZmlsZSI6ImNvbmZpZy5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8vIFRhYmxpY3kgemF3aWVyYWrEhWNhIGNhxYJvxZvEhyB3ecWbd2lldGxhbmVnbyB0ZWtzdHVcbmV4cG9ydCBjb25zdCB0ZXh0QXJyYXkgPSBbXG4gICdQaWVyd3N6eSBrb2QgZG8gc3VrY2VzdScsXG4gICdaYWN6bmlqIGthcmllcsSZIHcgSVQuJyxcbiAgJ05hdWN6IHNpxJkgcHJvZ3JhbW93YcSHLicsXG4gICdab3N0YcWEIHByb2dyYW1pc3TEhS4nLFxuICAnWm9zdGHFhCBQcm9ncmFtaXN0xIUgSmF2YS4nLFxuICAnWm9zdGHFhCBQcm9ncmFtaXN0xIUgLk5ldC4nLFxuICAnWm9zdGHFhCBQcm9ncmFtaXN0xIUgUHl0aG9uLicsXG4gICdab3N0YcWEIFByb2dyYW1pc3TEhSBSdWJ5LicsXG4gICdab3N0YcWEIEZyb250LWVuZCBkZXZlbG9wZXJlbS4nLFxuXTtcblxuXG5cblxuIl19
