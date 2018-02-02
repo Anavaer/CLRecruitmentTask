@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.typeWriter {
+  margin: 20px;
+  font-size: 4rem;
+  color: #33315a;
+  font-family: 'Open sans','Raleway', sans-serif;
+  font-weight: 600;
+}
+
+.typeWriter span {
+  animation: blink 0.8s infinite;
+  color: #f5b521;
+}
+
+@keyframes blink {
+  0% {opacity: 0}
+  50% {opacity: 1}
+  100% {opacity: 0}
+}
