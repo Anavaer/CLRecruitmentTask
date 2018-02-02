@@ -14,31 +14,51 @@ class TypeWriter extends React.Component {
   }
 
   componentDidMount() {
-
+    const {text} = this.props;
     let textFirst = '';
     let textSecond = '';
-    this.intervalFirst = setInterval((fullText = [...this.props.text[0]], typedText = textFirst) => {
+    let index = 1;
+
+    this.intervalFirst = setInterval((fullText = [...text[0]], typedText = textFirst) => {
       textFirst = typedText.concat(fullText[typedText.length]);
       this.setState({firstLine: textFirst});
 
-      if (this.state.firstLine === this.props.text[0]) {
-
+      if (this.state.firstLine === text[0]) {
         this.setState({firstSpan: 'none', secondSpan: 'inline'});
         clearInterval(this.intervalFirst);
 
-        this.props.text.map((sentence, i) => {
-          this.intervalSecond = setInterval((fullText = [...this.props.text[i + 1]], typedText = textSecond) => {
-            console.log(this.props.text[2]);
-            textSecond = typedText.concat(fullText[typedText.length]);
-            this.setState({secondLine: textSecond});
-            if(this.state.secondLine === this.props.text[i + 1]) {
-              clearInterval(this.intervalSecond);
-            }
-          }, this.props.interval)
-        });
+        const repeatMessage = (amount) => {
+
+          if(amount === 0){
+            return Promise.resolve();
+          }
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve();
+            }, this.props.delay)
+          })
+            .then(() => this.intervalSecond = setInterval((fullText = [...text[index]], typedText = textSecond) => {
+              if(typedText === text[index - 1]) {
+                typedText = '';
+              }
+              textSecond = typedText.concat(fullText[typedText.length]);
+              this.setState({secondLine: textSecond});
+              if (this.state.secondLine === text[index]) {
+                clearInterval(this.intervalSecond);
+                index += 1;
+              }
+            }, this.props.interval))
+            .then(() => {return repeatMessage(amount-1)})
+
+        };
+
+        repeatMessage(text.length - 1)
+          .then(console.log('doone'))
+
 
       }
     }, this.props.interval);
+
 
   }
 

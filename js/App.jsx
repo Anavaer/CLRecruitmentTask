@@ -8,7 +8,8 @@ class App extends React.Component {
     return (
       <TypeWriter
         text={textArray}
-        interval={1000}
+        interval={100}
+        delay={2000}
       />
     );
   }
