@@ -12,7 +12,7 @@ class App extends React.Component {
         text={textArray}
         interval={120}
         delay={1500}
-        infinite={true}
+        infinite={false}
       />
     );
   }
